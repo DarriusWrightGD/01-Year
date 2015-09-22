@@ -34,8 +34,6 @@
 /Debug
 /x64
 *.opensdf
-*.vcxproj
-*.filters
 *.user
 *.ilk
 *.pdb
