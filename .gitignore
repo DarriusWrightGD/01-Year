@@ -31,6 +31,8 @@
 *.app
 
 #Generated files
+/Debug
+/x64
 *.opensdf
 *.vcxproj
 *.filters
