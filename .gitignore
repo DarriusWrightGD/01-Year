@@ -32,5 +32,8 @@
 
 #Generated files
 *.opensdf
+*.vcxproj
+*.filters
+*.user
 *.sdf
 *.suo
