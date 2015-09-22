@@ -35,5 +35,11 @@
 *.vcxproj
 *.filters
 *.user
+*.ilk
+*.pdb
+*.idb
+*.tlog
+*.lastbuildstate
+*.log
 *.sdf
 *.suo
