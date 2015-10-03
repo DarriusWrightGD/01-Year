@@ -18,10 +18,8 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Tests.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="SoundexTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
