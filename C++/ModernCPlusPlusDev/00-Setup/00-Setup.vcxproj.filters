@@ -23,5 +23,8 @@
     <ClInclude Include="Soundex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DigitEncoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

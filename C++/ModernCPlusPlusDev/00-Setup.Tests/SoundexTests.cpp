@@ -27,7 +27,7 @@ This rule also applies to the first letter.
 
 
 
-class SoundexTest : public Test
+class SoundexTests : public Test
 {
 public:
 	Soundex soundex;
@@ -41,17 +41,17 @@ public:
 	}
 };
 
-TEST_F(SoundexTest, RetainsSoleLetterOfOneLetterWord)
+TEST_F(SoundexTests, RetainsSoleLetterOfOneLetterWord)
 {
 	EXPECT_EQ("A000", soundex.encode("A"));
 }
 
-TEST_F(SoundexTest, PadsWithZerosToEnsureThreeDigits)
+TEST_F(SoundexTests, PadsWithZerosToEnsureThreeDigits)
 {
 	EXPECT_EQ("I000", soundex.encode("I"));
 }
 
-TEST_F(SoundexTest, ReplaceTheConstantsWithDigits)
+TEST_F(SoundexTests, ReplaceTheConstantsWithDigits)
 {
 	EXPECT_EQ("A100", soundex.encode("Ab"));
 	EXPECT_EQ("A200", soundex.encode("Ac"));
@@ -61,18 +61,33 @@ TEST_F(SoundexTest, ReplaceTheConstantsWithDigits)
 	EXPECT_EQ("A600", soundex.encode("Ar"));
 }
 
-TEST_F(SoundexTest, IgnoresNonAlphabetics)
+TEST_F(SoundexTests, IgnoresNonAlphabetics)
 {
 	EXPECT_EQ("A000", soundex.encode("A#"));
 }
 
 //Disabling Tests
-//TEST_F(SoundexTest, DISABLED_ReplacesMultipleConstantsWithDigits)
+//TEST_F(SoundexTests, DISABLED_ReplacesMultipleConstantsWithDigits)
 //{
 //	EXPECT_EQ("A234", soundex.encode("Acdl"));
 //}
 
-TEST_F(SoundexTest, ReplacesMultipleConstantsWithDigits)
+TEST_F(SoundexTests, ReplacesMultipleConstantsWithDigits)
 {
 	EXPECT_EQ("A234", soundex.encode("Acdl"));
+}
+
+TEST_F(SoundexTests, LimitLengthOfEncodingToFourDigits)
+{
+	EXPECT_EQ(4, soundex.encode("Dcdlb").length());
+}
+
+TEST_F(SoundexTests, IgnoresVowelLikeLetters)
+{
+	EXPECT_EQ("B234", soundex.encode("Baeiouhycdl"));
+}
+
+TEST_F(SoundexTests, CombinesDuplicateEncodings)
+{
+	EXPECT_EQ("A123", soundex.encode("Abfcgdt"));
 }

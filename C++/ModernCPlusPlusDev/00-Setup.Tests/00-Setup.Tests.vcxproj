@@ -128,7 +128,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SoundexTest.cpp" />
+    <ClCompile Include="DigitEncoderTests.cpp" />
+    <ClCompile Include="SoundexTests.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -18,7 +18,10 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SoundexTest.cpp">
+    <ClCompile Include="DigitEncoderTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundexTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
