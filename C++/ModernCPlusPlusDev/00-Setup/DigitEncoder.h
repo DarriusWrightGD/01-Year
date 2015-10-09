@@ -30,6 +30,11 @@ public:
 		return encoding;
 	}
 private:
+	char lower(char c) const
+	{
+		return tolower(static_cast<unsigned char>(c));
+	}
+
 	bool hasCompletedEncodingDigits(const string & encoding) const
 	{
 		return encoding.length() == MAX_ENCODE_DIGITS_LENGTH;
@@ -50,7 +55,7 @@ private:
 			{ 'm',"5" },{ 'n', "5" },
 			{ 'r', "6" }
 		};
-		auto it = encodings.find(letter);
+		auto it = encodings.find(lower(letter));
 		return (it == encodings.end()) ? "" : encodings.find(letter)->second;
 	}
 };

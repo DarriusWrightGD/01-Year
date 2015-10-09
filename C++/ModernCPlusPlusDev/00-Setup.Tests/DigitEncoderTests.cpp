@@ -49,3 +49,8 @@ TEST_F(DigitEncoderTests, CombinesDuplicateEncodings)
 {
 	EXPECT_EQ("123", digitEncoder.encodeDigits("bfcgdt"));
 }
+
+TEST_F(DigitEncoderTests, IgnoresCasingInLetter)
+{
+	EXPECT_EQ("123",digitEncoder.encodeDigits("BfCGdT"));
+}

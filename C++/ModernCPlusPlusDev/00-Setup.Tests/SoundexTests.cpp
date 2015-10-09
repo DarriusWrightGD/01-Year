@@ -1,4 +1,5 @@
 #include <gtest\gtest.h>
+#include <gtest\gtest-spi.h>
 #include <Soundex.h>
 #include <iostream>
 using namespace testing;
@@ -33,11 +34,10 @@ public:
 	Soundex soundex;
 	virtual void SetUp() override
 	{
-		cout << "Setting up" << endl;
 	}
+
 	virtual void TearDown()override
 	{
-		cout << "Tearing Down" << endl;
 	}
 };
 
@@ -90,4 +90,15 @@ TEST_F(SoundexTests, IgnoresVowelLikeLetters)
 TEST_F(SoundexTests, CombinesDuplicateEncodings)
 {
 	EXPECT_EQ("A123", soundex.encode("Abfcgdt"));
+}
+
+TEST_F(SoundexTests, UppercasesFirstLetter)
+{
+	auto encoding = soundex.encode("abcd");
+	EXPECT_TRUE(encoding.front() == 'A');
+}
+
+TEST_F(SoundexTests, CombineDuplicateCodesWhen2ndLetterDuplicates1st)
+{
+	EXPECT_EQ("B230", soundex.encode("Bbcd"));
 }

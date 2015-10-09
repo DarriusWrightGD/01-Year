@@ -1,6 +1,7 @@
 #pragma once
 #include "DigitEncoder.h"
 #include <string>
+
 using std::string;
 
 
@@ -9,7 +10,7 @@ class Soundex {
 public:
 	string encode(const string & word) const
 	{
-		return padWithZeros(getWordHead(word) + digitEncoder.encodeDigits(getWordTail(word)));
+		return padWithZeros(uppercaseFront(getWordHead(word)) + digitEncoder.encodeDigits(getWordTail(word)));
 	}
 private:
 	static const int MAX_ENCODE_LENGTH = 4;
@@ -17,6 +18,11 @@ private:
 	string getWordHead(const string & word) const 
 	{
 		return word.substr(0, 1);
+	}
+
+	string uppercaseFront(const string & word) const
+	{
+		return std::string(1, toupper(static_cast<char>(word.front())));
 	}
 
 	string getWordTail(const string & word) const
