@@ -2,7 +2,7 @@
 // Created by Darrius on 10/11/2015.
 //
 
-//#include "rendering_wright_esengine_nativec_NativeLib.h"
+#include "rendering_wright_esengine_nativec_NativeLib.h"
 #include "NativeLib.h"
 
 NativeLib lib;
