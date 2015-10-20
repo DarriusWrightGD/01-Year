@@ -62,7 +62,9 @@ public class NDKActivity extends AppCompatActivity {
         }
 
         switch (type) {
-
+            case Integer:
+                valueEdit.setText(Integer.toString(store.getInteger(key)));
+                break;
             case String:
                 valueEdit.setText(store.getString(key));
                 break;
@@ -79,6 +81,9 @@ public class NDKActivity extends AppCompatActivity {
         }
         try{
             switch (type) {
+                case Integer:
+                    store.setInteger(key,Integer.parseInt(value));
+                    break;
                 case String:
                     store.setString(key,value);
                     break;

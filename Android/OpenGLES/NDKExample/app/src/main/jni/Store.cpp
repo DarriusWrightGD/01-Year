@@ -8,6 +8,7 @@
 
 static Store store;
 
+//called once before anything else
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM * vm, void * reserved)
 {
     JNIEnv *env;
@@ -19,6 +20,7 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM * vm, void * reserved)
  * Class:     com_example_dawrig_ndkexample_Store
  * Method:    getCount
  * Signature: ()I
+ * gets the length of the store array
  */
 JNIEXPORT jint JNICALL Java_com_example_dawrig_ndkexample_Store_getCount
         (JNIEnv *, jobject)
@@ -30,17 +32,13 @@ JNIEXPORT jint JNICALL Java_com_example_dawrig_ndkexample_Store_getCount
  * Class:     com_example_dawrig_ndkexample_Store
  * Method:    getString
  * Signature: (Ljava/lang/String;)Ljava/lang/String;
+ * get the string from the
  */
 JNIEXPORT jstring JNICALL Java_com_example_dawrig_ndkexample_Store_getString
         (JNIEnv * env, jobject, jstring key)
 {
     StoreEntry * entry = findEntry(env, &store,key);
-    if(isValidEntry(env,entry,StoreType_String)) {
-        return env->NewStringUTF(entry->value.storeString);
-    }else{
-        return NULL;
-    }
-
+    return isValidEntry(env,entry,StoreType_String) ? env->NewStringUTF(entry->value.storeString) : NULL;
 }
 
 /*
@@ -59,7 +57,33 @@ JNIEXPORT void JNICALL Java_com_example_dawrig_ndkexample_Store_setString
         env->GetStringUTFRegion(value, 0, stringLength, entry->value.storeString);
         entry->value.storeString[stringLength] = '\0';
     }
+}
 
+/*
+ * Class:     com_example_dawrig_ndkexample_Store
+ * Method:    getInteger
+ * Signature: (Ljava/lang/String;)I
+ */
+JNIEXPORT jint JNICALL Java_com_example_dawrig_ndkexample_Store_getInteger
+        (JNIEnv * env, jobject, jstring key)
+{
+    StoreEntry * entry = findEntry(env,&store,key);
+    return isValidEntry(env, entry, StoreType_Integer) ? entry->value.storeInteger : 0 ;
+}
+
+/*
+ * Class:     com_example_dawrig_ndkexample_Store
+ * Method:    setInteger
+ * Signature: (Ljava/lang/String;Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_example_dawrig_ndkexample_Store_setInteger
+        (JNIEnv * env, jobject, jstring key, jint value)
+{
+    StoreEntry * entry = allocateEntry(env, &store, key);
+    if(entry != NULL){
+        entry->type = StoreType_Integer;
+        entry->value.storeInteger = value;
+    }
 }
 
 bool isValidEntry(JNIEnv * env, StoreEntry * entry, StoreType type)

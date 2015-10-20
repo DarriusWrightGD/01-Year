@@ -13,10 +13,12 @@
 
 
 typedef enum{
+    StoreType_Integer,
     StoreType_String
 }StoreType;
 
 typedef union{
+    int32_t storeInteger;
     char * storeString;
 }StoreValue;
 

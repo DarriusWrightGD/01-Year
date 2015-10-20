@@ -31,6 +31,22 @@ JNIEXPORT jstring JNICALL Java_com_example_dawrig_ndkexample_Store_getString
 JNIEXPORT void JNICALL Java_com_example_dawrig_ndkexample_Store_setString
   (JNIEnv *, jobject, jstring, jstring);
 
+/*
+ * Class:     com_example_dawrig_ndkexample_Store
+ * Method:    getInteger
+ * Signature: (Ljava/lang/String;)I
+ */
+JNIEXPORT jint JNICALL Java_com_example_dawrig_ndkexample_Store_getInteger
+  (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_example_dawrig_ndkexample_Store
+ * Method:    setInteger
+ * Signature: (Ljava/lang/String;I)V
+ */
+JNIEXPORT void JNICALL Java_com_example_dawrig_ndkexample_Store_setInteger
+  (JNIEnv *, jobject, jstring, jint);
+
 #ifdef __cplusplus
 }
 #endif
