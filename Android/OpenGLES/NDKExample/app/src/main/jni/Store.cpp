@@ -2,6 +2,19 @@
 // Created by Darrius Wright on 10/17/15.
 //
 
+/*
+ * Everything is local by default
+ * To be able to use an object reference outside the method scope, or keep it for a long period of time then
+ * the object must be made global NewGlobalRef (also for threading use) and DeleteGlobalRef
+ *
+ * IsSameObject to compare two references
+ *
+ * NewWeakGlobalRef and DeleteWeakGlobalRef
+ * These  can be kept between jni calls and shared between threads, but don't prevent garbage collection.
+ * As a result must be used with care. You must create a global or local reference from them before use
+ * each time you need it and release right after.
+ * */
+
 #include "com_example_dawrig_ndkexample_Store.h"
 #include "com_example_dawrig_ndkexample_Store.h"
 #include "Store.h"
@@ -86,6 +99,31 @@ JNIEXPORT void JNICALL Java_com_example_dawrig_ndkexample_Store_setInteger
     }
 }
 
+/*
+ * Class:     com_example_dawrig_ndkexample_Store
+ * Method:    getColor
+ * Signature: (Ljava/lang/String;)Lcom/example/dawrig/ndkexample/Color;
+ */
+JNIEXPORT jobject JNICALL Java_com_example_dawrig_ndkexample_Store_getColor
+        (JNIEnv * env, jobject, jstring key) {
+    StoreEntry * entry = findEntry(env,&store,key);
+    return isValidEntry(env,entry,StoreType_Color) ? entry->value.storeColor : NULL;
+}
+
+/*
+ * Class:     com_example_dawrig_ndkexample_Store
+ * Method:    setColor
+ * Signature: (Ljava/lang/String;Lcom/example/dawrig/ndkexample/Color;)V
+ */
+JNIEXPORT void JNICALL Java_com_example_dawrig_ndkexample_Store_setColor
+        (JNIEnv * env, jobject, jstring key, jobject color){
+    StoreEntry * entry = allocateEntry(env,&store,key);
+    if(entry != NULL){
+        entry->type = StoreType_Color;
+        entry->value.storeColor = env->NewGlobalRef(color);
+    }
+}
+
 bool isValidEntry(JNIEnv * env, StoreEntry * entry, StoreType type)
 {
     return ((entry != NULL) && (entry->type == type));
@@ -124,6 +162,9 @@ void releaseEntryValue(JNIEnv * env, StoreEntry * entry)
     switch(entry->type){
         case StoreType_String:
             delete entry->value.storeString;
+            break;
+        case StoreType_Color:
+            delete env->DeleteGlobalRef(entry->value.storeColor);
             break;
     }
 }

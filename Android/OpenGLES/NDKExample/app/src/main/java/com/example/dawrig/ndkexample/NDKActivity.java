@@ -62,6 +62,9 @@ public class NDKActivity extends AppCompatActivity {
         }
 
         switch (type) {
+            case Color:
+                valueEdit.setText(store.getColor(key).toString());
+                break;
             case Integer:
                 valueEdit.setText(Integer.toString(store.getInteger(key)));
                 break;
@@ -81,6 +84,9 @@ public class NDKActivity extends AppCompatActivity {
         }
         try{
             switch (type) {
+                case Color:
+                    store.setColor(key,new Color(value));
+                    break;
                 case Integer:
                     store.setInteger(key,Integer.parseInt(value));
                     break;

@@ -47,6 +47,22 @@ JNIEXPORT jint JNICALL Java_com_example_dawrig_ndkexample_Store_getInteger
 JNIEXPORT void JNICALL Java_com_example_dawrig_ndkexample_Store_setInteger
   (JNIEnv *, jobject, jstring, jint);
 
+/*
+ * Class:     com_example_dawrig_ndkexample_Store
+ * Method:    getColor
+ * Signature: (Ljava/lang/String;)Lcom/example/dawrig/ndkexample/Color;
+ */
+JNIEXPORT jobject JNICALL Java_com_example_dawrig_ndkexample_Store_getColor
+  (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_example_dawrig_ndkexample_Store
+ * Method:    setColor
+ * Signature: (Ljava/lang/String;Lcom/example/dawrig/ndkexample/Color;)V
+ */
+JNIEXPORT void JNICALL Java_com_example_dawrig_ndkexample_Store_setColor
+  (JNIEnv *, jobject, jstring, jobject);
+
 #ifdef __cplusplus
 }
 #endif
