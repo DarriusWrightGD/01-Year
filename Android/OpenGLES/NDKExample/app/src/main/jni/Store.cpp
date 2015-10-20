@@ -164,7 +164,7 @@ void releaseEntryValue(JNIEnv * env, StoreEntry * entry)
             delete entry->value.storeString;
             break;
         case StoreType_Color:
-            delete env->DeleteGlobalRef(entry->value.storeColor);
+            env->DeleteGlobalRef(entry->value.storeColor);
             break;
     }
 }
